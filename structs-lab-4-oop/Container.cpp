@@ -1,6 +1,5 @@
 #include "Container.h"
 
-// Конструктор и деструктор
 Container::Container() {
     list = new LinearList();
 }
@@ -9,7 +8,6 @@ Container::~Container() {
     delete list;
 }
 
-// Методы добавления
 void Container::add_to_start(const Employee& employee) {
     list->add_to_start(employee);
 }
@@ -22,7 +20,6 @@ void Container::add_at_position(const Employee& employee, size_t position) {
     list->add_after(position, employee);
 }
 
-// Методы удаления
 void Container::remove_from_start() {
     list->remove_from_start();
 }
@@ -35,12 +32,16 @@ void Container::remove_at_position(size_t position) {
     list->remove_by_index(position);
 }
 
-// Очистка
+Employee* Container::find_by_index(int index)
+{
+    return list->find_by_index(index);
+}
+
+
 void Container::clear() {
     list->clear();
 }
 
-// Методы обработки сотрудников
 void Container::get_employees_younger_than(int year, int min_experience) {
     auto& employees = list->get_all();
     for (const auto& employee : employees) {

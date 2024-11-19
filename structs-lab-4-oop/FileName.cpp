@@ -4,18 +4,15 @@
 #include <iostream>
 #include <string>
 
-// Прототип функции меню
 int menu(const std::string& text);
 
-// Главная функция
 int main() {
     setlocale(LC_ALL, "ru");
 
     Container container;
-    LinearList list;
 
     while (true) {
-        int choice = menu(
+        const int choice = menu(
             "Выберите пункт меню:\n"
             "1. Проверить методы списка\n"
             "2. Проверить методы контейнера\n"
@@ -24,7 +21,7 @@ int main() {
         switch (choice) {
         case 1: {
             while (true) {
-                int list_choice = menu(
+                const int list_choice = menu(
                     "\nМетоды списка:\n"
                     "1. Добавить в начало\n"
                     "2. Добавить в конец\n"
@@ -40,42 +37,42 @@ int main() {
                 case 1: {
                     Employee emp;
                     std::cin >> emp;
-                    list.add_to_start(emp);
+                    container.add_to_start(emp);
                     std::cout << "Сотрудник добавлен в начало списка.\n";
                     break;
                 }
                 case 2: {
                     Employee emp;
                     std::cin >> emp;
-                    list.add_to_end(emp);
+                    container.add_to_end(emp);
                     std::cout << "Сотрудник добавлен в конец списка.\n";
                     break;
                 }
                 case 3: {
-                    int index = get_valid_input<int>("Введите индекс: ");
+                    const int index = get_valid_input<int>("Введите индекс: ");
                     Employee emp;
                     std::cin >> emp;
-                    list.add_after(index, emp);
+                    container.add_at_position(emp, index);
                     std::cout << "Сотрудник добавлен за индексом " << index << ".\n";
                     break;
                 }
                 case 4:
-                    list.remove_from_start();
+                    container.remove_from_start();
                     std::cout << "Сотрудник удалён из начала списка.\n";
                     break;
                 case 5:
-                    list.remove_from_end();
+                    container.remove_from_end();
                     std::cout << "Сотрудник удалён из конца списка.\n";
                     break;
                 case 6: {
-                    int index = get_valid_input<int>("Введите индекс: ");
-                    list.remove_by_index(index);
+                    const int index = get_valid_input<int>("Введите индекс: ");
+                    container.remove_at_position(index);
                     std::cout << "Сотрудник удалён по индексу " << index << ".\n";
                     break;
                 }
                 case 7: {
-                    int index = get_valid_input<int>("Введите индекс: ");
-                    Employee* emp = list.find_by_index(index);
+                    const int index = get_valid_input<int>("Введите индекс: ");
+                    const Employee* emp = container.find_by_index(index);
                     if (emp) {
                         std::cout << *emp;
                     }
@@ -85,7 +82,7 @@ int main() {
                     break;
                 }
                 case 8:
-                    list.clear();
+                    container.clear();
                     std::cout << "Список очищен.\n";
                     break;
                 case 9:
@@ -99,7 +96,7 @@ int main() {
         }
         case 2: {
             while (true) {
-                int container_choice = menu(
+                const int container_choice = menu(
                     "\nМетоды контейнера:\n"
                     "1. Добавить сотрудника\n"
                     "2. Показать сотрудников моложе года со стажем > 5 лет\n"
@@ -117,13 +114,13 @@ int main() {
                     break;
                 }
                 case 2: {
-                    int year = get_valid_input<int>("Введите год: ");
+                    const int year = get_valid_input<int>("Введите год: ");
                     std::cout << "Сотрудники моложе " << year << " со стажем > 5 лет:\n";
                     container.get_employees_younger_than(year, 5);
                     break;
                 }
                 case 3: {
-                    int dept_code = get_valid_input<int>("Введите код отдела: ");
+                    const int dept_code = get_valid_input<int>("Введите код отдела: ");
                     std::cout << "Удаление сотрудников из отдела " << dept_code << ":\n";
                     container.get_by_department_and_remove(dept_code);
                     break;
@@ -156,7 +153,6 @@ int main() {
     return 0;
 }
 
-// Функция для отображения меню и обработки ввода
 int menu(const std::string& text) {
     std::cout << text;
     return get_valid_input<int>("Ваш выбор: ");
