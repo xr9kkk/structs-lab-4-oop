@@ -23,7 +23,7 @@ public:
         emp.full_name = get_valid_input<std::string>("ФИО: ");
         emp.birth_year = get_valid_input<int>("Год рождения: ");
         emp.department_code = get_valid_input<int>("Код отдела: ");
-        emp.position = get_valid_input<std::string>("Должность :");
+        emp.position = get_valid_input<std::string>("Должность: ");
         emp.experience = get_valid_input<int>("Стаж работы: ");
         return is;
     }
