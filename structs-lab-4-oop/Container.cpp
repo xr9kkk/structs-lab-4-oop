@@ -83,6 +83,7 @@ std::ostream& operator<<(std::ostream& os, const Container& container) {
     }
     else {
         for (const auto& employee : employees) {
+            os << "Список сотрудников:\n";
             os << employee << "\n"; 
         }
     }

@@ -50,40 +50,76 @@ int main() {
                 }
                 case 3: {
                     const int index = get_valid_input<int>("Введите индекс: ");
-                    Employee emp;
-                    std::cin >> emp;
-                    container.add_at_position(emp, index);
-                    std::cout << "Сотрудник добавлен за индексом " << index << ".\n";
+                    if (!(index >= 0 && index < container.get_list_size()))
+                        std::cout << "Элемента с таким индексом не существует" << std::endl;
+                    else
+                    {
+                        Employee emp;
+                        std::cin >> emp;
+                        container.add_at_position(emp, index);
+                        std::cout << "Сотрудник добавлен за индексом " << index << ".\n";
+                    }
                     break;
                 }
                 case 4:
-                    container.remove_from_start();
-                    std::cout << "Сотрудник удалён из начала списка.\n";
+                    if (container.is_empty())
+                        std::cout << "Список пуст, удалять нечего" << std::endl;
+                    else
+                    {
+                        container.remove_from_start();
+                        std::cout << "Сотрудник удалён из начала списка.\n";
+                    }
                     break;
                 case 5:
-                    container.remove_from_end();
-                    std::cout << "Сотрудник удалён из конца списка.\n";
+                    if (container.is_empty())
+                        std::cout << "Список пуст, удалять нечего" << std::endl;
+                    else
+                    {
+                        container.remove_from_end();
+                        std::cout << "Сотрудник удалён из конца списка.\n";
+                    }
                     break;
                 case 6: {
-                    const int index = get_valid_input<int>("Введите индекс: ");
-                    container.remove_at_position(index);
-                    std::cout << "Сотрудник удалён по индексу " << index << ".\n";
+                    if (container.is_empty())
+                        std::cout << "Список пуст, сначала добавьте сотрудников" << std::endl;
+                    else
+                    {
+                        const int index = get_valid_input<int>("Введите индекс: ");
+                        if (!(index >= 0 && index < container.get_list_size()))
+                            std::cout << "Элемента с таким индексом не существует" << std::endl;
+
+                        else
+                        {
+                            container.remove_at_position(index);
+                            std::cout << "Сотрудник удалён по индексу " << index << ".\n";
+                        }
+                    }
                     break;
                 }
                 case 7: {
-                    const int index = get_valid_input<int>("Введите индекс: ");
-                    const Employee* emp = container.find_by_index(index);
-                    if (emp) {
-                        std::cout << *emp;
-                    }
-                    else {
-                        std::cout << "Сотрудник с таким индексом не найден.\n";
+                    if (container.is_empty())
+                        std::cout << "Список пуст, сначала добавьте сотрудников" << std::endl;
+                    else
+                    {
+                        const int index = get_valid_input<int>("Введите индекс: ");
+                        const Employee* emp = container.find_by_index(index);
+                        if (emp) {
+                            std::cout << *emp;
+                        }
+                        else {
+                            std::cout << "Сотрудник с таким индексом не найден.\n";
+                        }
                     }
                     break;
                 }
                 case 8:
-                    container.clear();
-                    std::cout << "Список очищен.\n";
+                    if (container.is_empty())
+                        std::cout << "Список пуст, чистить нечего" << std::endl;
+                    else
+                    {
+                        container.clear();
+                        std::cout << "Список очищен.\n";
+                    }
                     break;
                 case 9:
                     goto end_list_menu;
@@ -114,23 +150,37 @@ int main() {
                     break;
                 }
                 case 2: {
-                    const int year = get_valid_input<int>("Введите год: ");
-                    std::cout << "Сотрудники моложе " << year << " со стажем > 5 лет:\n";
-                    container.get_employees_younger_than(year, 5);
+                    if (container.is_empty())
+                        std::cout << "Список пуст, сначала добавьте сотрудников" << std::endl;
+                    else
+                    {
+                        const int year = get_valid_input<int>("Введите год: ");
+                        std::cout << "Сотрудники моложе " << year << " со стажем > 5 лет:\n";
+                        container.get_employees_younger_than(year, 5);
+                    }
                     break;
                 }
                 case 3: {
-                    const int dept_code = get_valid_input<int>("Введите код отдела: ");
-                    std::cout << "Удаление сотрудников из отдела " << dept_code << ":\n";
-                    container.get_by_department_and_remove(dept_code);
+                    if (container.is_empty())
+                        std::cout << "Список пуст, сначала добавьте сотрудников" << std::endl;
+                    else
+                    {
+                        const int dept_code = get_valid_input<int>("Введите код отдела: ");
+                        std::cout << "Удаление сотрудников из отдела " << dept_code << ":\n";
+                        container.get_by_department_and_remove(dept_code);
+                    }
                     break;
                 }
                 case 4:
-                    container.sort_employees();
-                    std::cout << "Сотрудники отсортированы.\n";
+                    if (container.is_empty())
+                        std::cout << "Список пуст, сначала добавьте сотрудников" << std::endl;
+                    else
+                    {
+                        container.sort_employees();
+                        std::cout << "Сотрудники отсортированы.\n";
+                    }
                     break;
                 case 5:
-                    std::cout << "Все сотрудники:\n";
                     std::cout << container;
                     break;
                 case 6:

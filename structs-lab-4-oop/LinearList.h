@@ -7,6 +7,7 @@ private:
     std::vector<Employee> list;
 
 public:
+    bool is_empty() { return list.empty(); };
     void add_to_start(const Employee& employee);
     void add_to_end(const Employee& employee);
     void add_after(int index, const Employee& employee);

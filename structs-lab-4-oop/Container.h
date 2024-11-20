@@ -30,5 +30,8 @@ public:
     void get_by_department_and_remove(int department_code);
     void sort_employees();
 
+    size_t get_list_size() { return list->size(); };
+    bool is_empty() { return list->is_empty(); };
+
     friend std::ostream& operator<<(std::ostream& os, const Container& container);
 };
